@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pepe Soy Logistics | Global Shipping Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(25, 25, 35, 0.8);
+            --gold-accent: #d4af37;
+            --blue-accent: #2563eb;
+            --text-light: #ffffff;
+            --text-gray: #a1a1aa;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .logo-loading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 15, 0.9);
+            padding: 1rem 2rem;
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path fill="rgba(212,175,55,0.05)" d="M500,0 L1000,500 L500,1000 L0,500 Z"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--gold-accent), var(--blue-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gold-accent);
+            color: var(--dark-bg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-accent);
+            border: 2px solid var(--gold-accent);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Tracking Section */
+        .tracking-section {
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            margin: 4rem 0;
+        }
+
+        .tracking-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .tracking-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tracking-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tracking-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #374151;
+            border-radius: var(--border-radius);
+            background: var(--dark-bg);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .tracking-result {
+            background: var(--dark-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .tracking-status {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--gold-accent);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Why Choose Us */
+        .why-us-section {
+            padding: 6rem 2rem;
+            background: var(--card-bg);
+        }
+
+        .features-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-check {
+            color: var(--gold-accent);
+            font-size: 1.5rem;
+        }
+
+        /* Pricing Calculator */
+        .pricing-section {
+            padding: 6rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .calculator-form {
+            display: grid;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text-gray);
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 1rem;
+            border: 2px solid #374151;
+            border-radius: var(--border-radius);
+            background: var(--dark-bg);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .calculate-btn {
+            background: var(--blue-accent);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .calculate-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .result-display {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--dark-bg);
+            border-radius: var(--border-radius);
+            text-align: center;
+            display: none;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 6rem 2rem;
+            background: var(--card-bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--dark-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 4rem;
+            color: var(--gold-accent);
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--gold-accent);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-full {
+            grid-column: 1 / -1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            padding: 3rem 2rem;
+            border-top: 1px solid #374151;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: var(--gold-accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid #374151;
+            margin-top: 3rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--dark-bg);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .tracking-form {
+                flex-direction: column;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="logo-loading">Pepe Soy Logistics</div>
+            <p style="color: var(--text-gray);">Loading Premium Experience...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Pepe Soy Logistics</div>
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#tracking">Tracking</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Global Shipping, Simplified.</h1>
+            <p>Fast, secure, and reliable logistics solutions worldwide.</p>
+            <div class="cta-buttons">
+                <a href="#tracking" class="btn btn-primary">Track Shipment</a>
+                <a href="#pricing" class="btn btn-secondary">Get a Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="tracking-section" id="tracking">
+        <div class="tracking-container">
+            <h2>Track Your Shipment</h2>
+            <div class="tracking-form">
+                <input type="text" class="tracking-input" placeholder="Enter Tracking Number" id="trackingNumber">
+                <button class="btn btn-primary" onclick="trackShipment()">Track Now</button>
+            </div>
+            <div class="tracking-result" id="trackingResult">
+                <div class="tracking-status" id="status">In Transit</div>
+                <div class="tracking-details">
+                    <p><strong>Location:</strong> <span id="location">New York, NY</span></p>
+                    <p><strong>Estimated Delivery:</strong> <span id="deliveryDate">April 30, 2026</span></p>
+                    <p><strong>Last Update:</strong> <span id="lastUpdate">April 27, 2026 - 10:30 AM</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <h2 class="section-title animate-on-scroll">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Express Delivery</h3>
+                <p>Lightning-fast delivery with guaranteed timelines and real-time tracking.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <h3>Freight Shipping</h3>
+                <p>Reliable freight solutions for bulk cargo and international shipments.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">
+                    <i class="fas fa-warehouse"></i>
+                </div>
+                <h3>Warehousing</h3>
+                <p>Secure storage facilities with inventory management and distribution.</p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h3>International Logistics</h3>
+                <p>Complete customs clearance and global supply chain management.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us-section">
+        <h2 class="section-title animate-on-scroll">Why Choose Pepe Soy Logistics</h2>
+        <div class="features-list">
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-check">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div>
+                    <h3>Real-time Tracking</h3>
+                    <p>Monitor your shipments every step of the way with our advanced tracking system.</p>
+                </div>
+            </div>
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-check">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div>
+                    <h3>Global Coverage</h3>
+                    <p>Access to 200+ countries and territories with our extensive network.</p>
+                </div>
+            </div>
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-check">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div>
+                    <h3>24/7 Support</h3>
+                    <p>Dedicated customer service team available around the clock.</p>
+                </div>
+            </div>
+            <div class="feature-item animate-on-scroll">
+                <div class="feature-check">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div>
+                    <h3>Secure Handling</h3>
+                    <p>Advanced security protocols and insurance for all shipments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Calculator -->
+    <section class="pricing-section" id="pricing">
+        <h2 class="section-title animate-on-scroll">Get a Quote</h2>
+        <div class="calculator-form animate-on-scroll">
+            <div class="form-group">
+                <label for="weight">Package Weight (kg)</label>
+                <input type="number" id="weight" placeholder="Enter weight" min="1">
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <select id="destination">
+                    <option value="">Select destination</option>
+                    <option value="usa">United States</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="eu">European Union</option>
+                    <option value="asia">Asia Pacific</option>
+                    <option value="africa">Africa</option>
+                </select>
+            </div>
+            <button class="calculate-btn" onclick="calculatePrice()">Calculate Price</button>
+            <div class="result-display" id="priceResult">
+                <h3>Estimated Cost: $<span id="estimatedPrice">0.00</span></h3>
+                <p>Delivery Time: <span id="deliveryTime">5-7 business days</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <h2 class="section-title animate-on-scroll">Client Testimonials</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card animate-on-scroll">
+                <div class="testimonial-text">
+                    "Pepe Soy Logistics transformed our supply chain. Their reliability and transparency saved us thousands."
+                </div>
+                <div class="testimonial-author">- Sarah Johnson, CEO TechCorp</div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <div class="testimonial-text">
+                    "Outstanding service! Our international shipments arrive on time every time. Highly recommended."
+                </div>
+                <div class="testimonial-author">- Michael Chen, Founder GlobalTrade</div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <div class="testimonial-text">
+                    "Professional, efficient, and cost-effective. They've become our trusted logistics partner."
+                </div>
+                <div class="testimonial-author">- Emma Rodriguez, Operations Director</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title animate-on-scroll">Contact Us</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@pepesoylogistics.com</span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Logistics Avenue, New York, NY 10001</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                    </div>
+                    <div class="form-row form-full">
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" style="width: 100%; padding: 1rem; border-radius: var(--border-radius); background: var(--dark-bg); color: var(--text-light); border: 2px solid #374151;"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">Pepe Soy Logistics</div>
+                <p>Premium logistics solutions for the modern world.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li><a href="#home" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Home</a></li>
+                    <li><a href="#services" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Services</a></li>
+                    <li><a href="#tracking" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Tracking</a></li>
+                    <li><a href="#pricing" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li><a href="#" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Express Delivery</a></li>
+                    <li><a href="#" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Freight Shipping</a></li>
+                    <li><a href="#" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Warehousing</a></li>
+                    <li><a href="#" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">International</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li><a href="#" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Help Center</a></li>
+                    <li><a href="#" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Documentation</a></li>
+                    <li><a href="#" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">API Reference</a></li>
+                    <li><a href="#" style="color: var(--text-gray); text-decoration: none; display: block; margin-bottom: 0.5rem;">Status</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Pepe Soy Logistics. All rights reserved. Built for enterprise excellence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loadingOverlay').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Fake tracking function
+        function trackShipment() {
+            const trackingNumber = document.getElementById('trackingNumber').value;
+            const resultDiv = document.getElementById('trackingResult');
+            
+            if (!trackingNumber) {
+                alert('Please enter a tracking number');
+                return;
+            }
+            
+            // Show loading state
+            resultDiv.style.display = 'block';
+            document.getElementById('status').textContent = 'Checking...';
+            document.getElementById('location').textContent = 'Processing';
+            document.getElementById('deliveryDate').textContent = 'Calculating';
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                const statuses = ['In Transit', 'Processing', 'Out for Delivery', 'Delivered'];
+                const locations = [
+                    'New York, NY',
+                    'London, UK', 
+                    'Tokyo, Japan',
+                    'Berlin, Germany',
+                    'Sydney, Australia',
+                    'Dubai, UAE'
+                ];
+                
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+                const randomDate = new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000).toLocaleDateString();
+                
+                document.getElementById('status').textContent = randomStatus;
+                document.getElementById('location').textContent = randomLocation;
+                document.getElementById('deliveryDate').textContent = randomDate;
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleString();
+                
+                // Animate the result
+                resultDiv.style.animation = 'none';
+                setTimeout(() => {
+                    resultDiv.style.animation = 'fadeInUp 0.5s ease';
+                }, 10);
+            }, 1000);
+        }
+
+        // Fake price calculator
+        function calculatePrice() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const destination = document.getElementById('destination').value;
+            const resultDiv = document.getElementById('priceResult');
+            
+            if (!weight || !destination) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            let baseRate = 5; // $5 per kg base rate
+            let multiplier = 1;
+            
+            // Destination multipliers
+            switch(destination) {
+                case 'usa':
+                    multiplier = 1;
+                    break;
+                case 'uk':
+                    multiplier = 1.2;
+                    break;
+                case 'eu':
+                    multiplier = 1.3;
+                    break;
+                case 'asia':
+                    multiplier = 1.5;
+                    break;
+                case 'africa':
+                    multiplier = 1.8;
+                    break;
+            }
+            
+            const price = (weight * baseRate * multiplier).toFixed(2);
+            const days = Math.floor(Math.random() * 5) + 3; // 3-7 days
+            
+            document.getElementById('estimatedPrice').textContent = price;
+            document.getElementById('deliveryTime').textContent = `${days}-${days + 2} business days`;
+            
+            resultDiv.style.display = 'block';
+            resultDiv.style.animation = 'none';
+            setTimeout(() => {
+                resultDiv.style.animation = 'fadeInUp 0.5s ease';
+            }, 10);
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will contact you shortly.');
+            this.reset();
+        });
+
+        // Add hover effects to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation to CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * -0.5;
+            parallax.style.backgroundPositionY = speed + 'px';
+        });
+    </script>
+</body>
+</html>
